@@ -29,7 +29,7 @@ export default function LinkCard({ link, refreshLinks }) {
   };
 
   return (
-    <div className="card">
+    <div className="card my-2">
       <div className="card-header">{link.name}</div>
       <div className="card-body">
         <a href={link.url}>{link.url}</a>
@@ -39,7 +39,7 @@ export default function LinkCard({ link, refreshLinks }) {
         <button className="btn btn-warning mr-2" onClick={archiveLink}>
           Archive
         </button>
-        <button className="btn btn-danger " onClick={deleteLink}>
+        <button className="btn btn-danger mx-3" onClick={deleteLink}>
           {" "}
           Delete
         </button>
