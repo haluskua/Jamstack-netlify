@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import LinkForm from "./components/LinkForm";
 //Grab all of the links
 //display all of the links
 //add delete and archive functionality
@@ -24,6 +25,7 @@ function App() {
   return (
     <div className="container py-5">
       <h1 className="text-center mb-5">List 0'</h1>
+      <LinkForm refreshLinks={loadLinks} />
       <LinkList links={links} refreshLinks={loadLinks} />
     </div>
   );
