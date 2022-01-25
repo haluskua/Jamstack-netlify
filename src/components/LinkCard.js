@@ -1,6 +1,33 @@
 import React from "react";
 
-export default function LinkCard(link) {
+export default function LinkCard({ link, refreshLinks }) {
+  const archiveLink = async () => {
+    //make a request to API to archive it from link
+    link.archived = true;
+    try {
+      await fetch("/api/updateLink", {
+        method: "PUT",
+        body: JSON.stringify(link),
+      });
+      refreshLinks();
+    } catch (error) {
+      console.error("arrrgh', error");
+    }
+  };
+
+  const deleteLink = async () => {
+    const id = link._id;
+    try {
+      await fetch("/api/deleteLink", {
+        method: "DELETE",
+        body: JSON.stringify({ id }),
+      });
+      refreshLinks();
+    } catch (error) {
+      console.error("arrrh', error");
+    }
+  };
+
   return (
     <div className="card">
       <div className="card-header">{link.name}</div>
@@ -9,8 +36,13 @@ export default function LinkCard(link) {
         <p>{link.description}</p>
       </div>
       <div className="card-footer">
-        <button className="btn btn-warning mr-2">Archive</button>
-        <button className="btn btn-danger "> Delete</button>
+        <button className="btn btn-warning mr-2" onClick={archiveLink}>
+          Archive
+        </button>
+        <button className="btn btn-danger " onClick={deleteLink}>
+          {" "}
+          Delete
+        </button>
       </div>
     </div>
   );
