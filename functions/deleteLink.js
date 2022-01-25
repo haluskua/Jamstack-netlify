@@ -4,8 +4,11 @@ const sendQuery = require('./utils/sendQuery');
 const formattedResponse = require('./utils/formattedResponse');
 
 exports.handler = async (event) => {
-    const { id } = JSON.parse(event.body);
-    const variables = { id };
+     if (event.httpMethod ===! 'DELETE') {
+     return formattedResponse(405, { err: 'Method not supported'})     
+    }
+         const { id } = JSON.parse(event.body);
+         const variables = { id };
     try {
         const { deleteLink: deletedLink } = await sendQuery(
             DELETE_LINK,
